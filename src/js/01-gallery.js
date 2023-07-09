@@ -1,6 +1,9 @@
 import { galleryItems } from './gallery-items.js';
-// Change code below this line
 console.log(galleryItems);
+// Descris în documentație
+import SimpleLightbox from "simplelightbox";
+// Import suplimentar de stil
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 const galleryPic=document.querySelector("ul.gallery");
 console.log(galleryPic);
@@ -24,20 +27,8 @@ galleryItems.forEach((item) => {
     galleryPic.append(galleryNew);
 });
 
-    galleryPic.addEventListener('click', event => {
-        event.preventDefault();
-        if (event.target.nodeName !== 'IMG') {
-            return
-        }
-        const selectedImage = event.target.getAttribute('data-source')
-        const instance = basicLightbox.create
-        (`<img src="${selectedImage}">`)
-    
-        instance.show();
-        
-        galleryPic.addEventListener('keydown', event => {
-            if (event.key === 'Escape') {
-                instance.close();
-            }
-        })
-    })
+const lightbox = new SimpleLightbox('.gallery a', {
+    captionDelay: 250,
+    captions: true,
+    captionsData: "alt",
+});
